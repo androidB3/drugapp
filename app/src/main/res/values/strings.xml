@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">DrugApp</string>
+    <string name="drug_interacts">Tương tác</string>
+    <string name="drugs">Thuốc</string>
+    <string name="ho_t_ch_t">Hoạt chất</string>
+    <string name="content_text">Tương tác thuốc là sự tác dụng qua lại lẫn nhau giữa thuốc này với thuốc khác, giữa thuốc với tình trạng sinh lý của cơ thể.</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="drugs">
+        <item>"Angobin"</item>
+        <item>"Bisoprolol Stada 10mg"</item>
+        <item>"Parazacol 1000"</item>
+        <item>"Ouabain 0,25mg"</item>
+        <item>"Douzeumin 5000"</item>
+        <item>"Paracetamol 500mg"</item>
+        <item>"Vicometrin 480"</item>
+        <item>"SaViBone"</item>
+    </string-array>
+
+    <string-array name="active">
+        <item>"Tetracyclin 250 mg"</item>
+        <item>"Berberin clorid 0,01g"</item>
+        <item>"Parazacol 1000"</item>
+        <item>"colchicin 1mg"</item>
+        <item>"Clarithromycin 500 mg"</item>
+        <item>"famciclovir 750 mg"</item>
+        <item>"Loratadin 10mg"</item>
+        <item>"hyaluronidase 1500IU"</item>
+    </string-array>
+
+    <string name="facebook_app_id">1189369434765006</string>
+    <string name="fb_login_protocol_scheme">fb1189369434765006</string>
+
+    <string name="map_api_key">AIzaSyAd4F07hAUNHwjLk5cYBpDC_9k6YIsnTY8</string>
+
+</resources>
