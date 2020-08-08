@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menuHome"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item android:id="@+id/menuFavorite"
+        android:icon="@drawable/ic_interact"
+        android:title="Interact" />
+
+    <item android:id="@+id/menuAccount"
+        android:icon="@drawable/ic_active"
+        android:title="Active" />
+
+    <item android:id="@+id/menuSetting"
+        android:icon="@drawable/ic_medical_nt"
+        android:title="Medical" />
+</menu>

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DruglistActivity extends AppCompatActivity {
     private ArrayList<Drug> drugArrayList;
 
-
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
