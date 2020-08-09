@@ -33,18 +33,18 @@
         android:text="Dan Brown"
         android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/buttonDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="61dp"
+<!--    <Button-->
+<!--        android:id="@+id/buttonDetails"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="61dp"-->
 
-        android:layout_marginRight="6dp"
-        android:background="@drawable/bg_ui_list"
-        android:text="Xem chi tiết"
-        android:textAllCaps="false" />
+<!--        android:layout_marginRight="6dp"-->
+<!--        android:background="@drawable/bg_ui_list"-->
+<!--        android:text="Xem chi tiết"-->
+<!--        android:textAllCaps="false" />-->
 
 </RelativeLayout>
