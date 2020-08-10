@@ -12,9 +12,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.drugapp.Entity.GetNearbyPlacesData;
 import com.example.drugapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -31,9 +37,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
     Location currentLocation;
+    Button btnSearch;
+
+    int PROXIMITY_RADIUS=10000;
+    double latitude,longitude;
 
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
@@ -43,9 +55,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
+        btnSearch=findViewById(R.id.btnSearchStore);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick2(view);
+            }
+        });
 
 
 //        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.myMap);
@@ -85,13 +104,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         map=googleMap;
 
-
-
         LatLng latLng=new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,13));
         googleMap.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title(" i m here"));
+                .title(" i m here"))
+                .setIcon(bitmapDescriptor(getApplicationContext(),R.drawable.ic_baseline_accessibility_new_24));
 
         LatLng HCM = new LatLng(10.810643, 106.709136);
 
@@ -134,5 +152,35 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 }
                 break;
         }
+    }
+
+
+    public void onClick2(View v){
+        switch (v.getId())
+        {
+            case R.id.btnSearchStore:{
+              map.clear();
+              String hospital="hospital";
+              String url=getUrl(currentLocation.getLatitude(),currentLocation.getLongitude(),hospital);
+              Object dataTransfer[]=new Object[2];
+              dataTransfer[0]=map;
+              dataTransfer[1]=url;
+                GetNearbyPlacesData getNearbyPlacesData=new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(dataTransfer);
+                Toast.makeText(MapActivity.this,"showing nearby hospital",Toast.LENGTH_LONG).show();
+                break;
+            }
+
+        }
+    }
+
+    private String getUrl(double latitude,double longitude,String nearbyPlace){
+        StringBuilder googlePlaceUrl=new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlaceUrl.append("location"+latitude+","+longitude);
+        googlePlaceUrl.append("&radius"+PROXIMITY_RADIUS);
+        googlePlaceUrl.append("&type="+nearbyPlace);
+        googlePlaceUrl.append("&sensor=true");
+        googlePlaceUrl.append("&key="+"AIzaSyAWGx-z4j2Uc_B3S_y_D_phP03ydyCCqiA");
+        return googlePlaceUrl.toString();
     }
 }
