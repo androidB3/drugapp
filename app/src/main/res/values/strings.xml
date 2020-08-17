@@ -32,6 +32,12 @@
     <string name="facebook_app_id">1189369434765006</string>
     <string name="fb_login_protocol_scheme">fb1189369434765006</string>
 
-    <string name="map_api_key">AIzaSyAWGx-z4j2Uc_B3S_y_D_phP03ydyCCqiA</string>
+
+    <string name="map_api_key">AIzaSyAzKmakGKZJzjmcaAlHlEX-hQGqvSOvbhQ</string>
+<!--//-->
+
+
+    <string name="thuoc_la_gi">Thuốc là gì?</string>
+
 
 </resources>

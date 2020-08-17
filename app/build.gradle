@@ -9,11 +9,13 @@ android {
         applicationId "com.example.drugapp"
         minSdkVersion 16
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true;
+
     }
 
     buildTypes {
@@ -25,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.libraries.places:places:2.3.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -56,9 +59,10 @@ dependencies {
     //login facebook
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     //places
-//    implementation 'com.google.android.libraries.places:places:2.3.0'
+
 
 
 }

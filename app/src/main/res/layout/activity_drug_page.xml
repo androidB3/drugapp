@@ -21,8 +21,8 @@
             android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
             android:text="Loại thuốc mà bạn muốn tìm ?"
             android:textColor="@color/colorWhite"
             android:textSize="15dp"
@@ -68,24 +68,84 @@
                 android:tint="@color/colorPrimary" />
         </LinearLayout>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/titleDrug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:text="Thuốc tìm kiếm nhiều"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutHeader" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPagerImageSlider"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="84dp"
-            android:paddingLeft="80dp"
-            android:paddingRight="80dp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerImageSlider"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="108dp"
+        android:paddingLeft="80dp"
+        android:paddingRight="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layoutHeader">
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/bottom_drugpage"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toBottomOf="@+id/viewPagerImageSlider"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
+
+
+            <TextView
+                android:id="@+id/tvndthuoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thuoc_la_gi"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.065"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.103" />
+
+
+        <TextView
+            android:id="@+id/tvndthuoc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dược phẩm (còn được gọi là thuốc) là một loại chất hóa học dùng để chẩn đoán, chữa bệnh, điều trị hoặc phòng ngừa bệnh. Điều trị bằng thuốc là một phần quan trọng của lĩnh vực y tế và dựa vào dược lý học để tiến bộ liên tục và dược học để quản lý thuốc một cách thích hợp."
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/layoutHeader">
+            app:layout_constraintTop_toTopOf="@+id/tvndthuoc"
+            app:layout_constraintVertical_bias="0.395" />
 
-        </androidx.viewpager2.widget.ViewPager2>
 
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
