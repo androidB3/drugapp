@@ -8,21 +8,30 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.loader.content.AsyncTaskLoader;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.drugapp.Entity.DownloadUrl;
 import com.example.drugapp.Entity.GetNearbyPlacesData;
+
 import com.example.drugapp.R;
+import com.example.drugapp.directionhelpers.FetchURL;
+import com.example.drugapp.directionhelpers.TaskLoadedCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,16 +45,27 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
     GoogleMap map;
     Location currentLocation;
-    Button btnSearch;
+    Button btnSearch,btnDirect;
     Polyline currentPolyline=null;
+    EditText edtStartDes,edtEndDes;
+    private MarkerOptions place1, place2;
+
+//    private List<Marker> originMarkers = new ArrayList<>();
+//    private List<Marker> destinationMarkers = new ArrayList<>();
+//    private List<Polyline> polylinePaths = new ArrayList<>();
+//    private ProgressDialog progressDialog;
+
 
 
     int PROXIMITY_RADIUS=10000;
@@ -59,6 +79,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         btnSearch=findViewById(R.id.btnSearchStore);
+        btnDirect=findViewById(R.id.btnDirect);
+
+
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
 //        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.myMap);
@@ -68,8 +92,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                        map.clear();
-                        String hospital="hospital";
+                        //map.clear();
+                        String hospital="drugstore";
                         String url=getUrl(currentLocation.getLatitude(),currentLocation.getLongitude(),hospital);
                         Object dataTransfer[]=new Object[2];
                         dataTransfer[0]=map;
@@ -85,9 +109,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
 
+        btnDirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              //  new FetchURL(MapActivity.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "driving"), "driving");
+
+
+            }
+        });
+
+        place1 = new MarkerOptions().position(new LatLng(27.658143, 85.3199503)).title("Location 1");
+        place2 = new MarkerOptions().position(new LatLng(27.667491, 85.3208583)).title("Location 2");
+
 
     }
-//ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+
 
     private void fetchLastLocation() {
 
@@ -147,6 +183,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //        String url=getUrlDirect(latLng,BTH,"driving");
         //private static final LatLng MELBOURNE = new LatLng(10.8231, 106.6297);
 //icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_baseline_local_hospital_24));
+        map.addMarker(place1);
+        map.addMarker(place2);
     }
 
     private BitmapDescriptor bitmapDescriptor(Context context,int VectorResId){
@@ -188,17 +226,29 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-//    private String getUrlDirect(LatLng  origin,LatLng dest,String directionMode){
-//        String str_origin="origin="+origin.latitude+","+origin.longitude;
-//
-//        String str_dest="destination"+dest.latitude+","+origin.longitude;
-//
-//        String mode="mode="+directionMode;
-//
-//        String parameters=str_origin+"&"+str_dest+"&"+mode;
-//        String output="json";
-//        String url="http://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters+"&key="+getString(R.string.map_api_key);
-//        return url;
-//
-//    }
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.map_api_key);
+        return url;
+    }
+
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = map.addPolyline((PolylineOptions) values[0]);
+
+    }
+
+
 }

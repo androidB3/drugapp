@@ -1,9 +1,17 @@
 package com.example.drugapp.Entity;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 
 
+import androidx.core.content.ContextCompat;
+
+import com.example.drugapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -57,11 +65,14 @@ public class GetNearbyPlacesData extends AsyncTask<Object,String,String> {
             LatLng latLng=new LatLng(lat,lng);
             markerOptions.position(latLng);
             markerOptions.title(placeName);
-           markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+           markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+         //   markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmapDescriptor(getClass(),R.drawable.icstore)));
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
 
         }
     }
+
+
 }

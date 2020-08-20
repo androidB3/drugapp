@@ -6,19 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MapActivity">
 
+
+    <Button
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="search Drug"
+        android:id="@+id/btnSearchStore"
+        android:textSize="10sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Button>
+    <Button
+        android:layout_below="@+id/btnSearchStore"
+        android:layout_alignParentRight="true"
+        android:text="Direct"
+        android:textSize="10sp"
+        android:id="@+id/btnDirect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Button>
+
+
     <fragment
+        android:layout_alignParentBottom="true"
         android:id="@+id/myMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
-            android:text="search Drug store"
-            android:id="@+id/btnSearchStore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-        </Button>
 
     </fragment>
+
+
 
 </RelativeLayout>
